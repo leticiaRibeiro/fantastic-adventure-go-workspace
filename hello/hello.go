@@ -6,9 +6,9 @@ import (
 )
 
 func main() {
-	var name = "Lele"         //not necessary to say it's a string (because it's inferred)
-	var age = 25              //so does here
-	var version float32 = 1.1 //so does here
+	name := "Lele" //not necessary to type "var" because it's inferred
+	age := 25      //so does here
+	var version float32 = 1.1
 	fmt.Println("Hey", name, "your age is", age)
 	fmt.Println("This project is on version", version)
 
