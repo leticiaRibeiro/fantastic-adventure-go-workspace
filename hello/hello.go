@@ -18,13 +18,17 @@ func main() {
 	fmt.Scan(&command)
 	fmt.Println("Option choose:", command)
 
-	if command == 1 {
+	// Don't need to use break command in go language!!!!!
+
+	switch command {
+	case 1:
 		fmt.Println("Starting Monitoring...")
-	} else if command == 2 {
+	case 2:
 		fmt.Println("Showing logs...")
-	} else if command == 0 {
+	case 0:
 		fmt.Println("Exit...")
-	} else {
+	default:
 		fmt.Println("Dunno wat u said")
 	}
+
 }
