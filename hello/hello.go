@@ -9,21 +9,23 @@ import (
 func main() {
 
 	showsIntroduction()
-	showsMenu()
+	for { // while (true)
+		showsMenu()
 
-	command := readsCommand()
+		command := readsCommand()
 
-	switch command {
-	case 1:
-		startMonitoring()
-	case 2:
-		showLogs()
-	case 0:
-		fmt.Println("Exit...")
-		os.Exit(0)
-	default:
-		fmt.Println("Dunno wat u said")
-		os.Exit(-1)
+		switch command {
+		case 1:
+			startMonitoring()
+		case 2:
+			showLogs()
+		case 0:
+			fmt.Println("Exit... bye :)")
+			os.Exit(0)
+		default:
+			fmt.Println("Dunno wat u said")
+			os.Exit(-1)
+		}
 	}
 }
 
@@ -50,8 +52,15 @@ func showsMenu() {
 
 func startMonitoring() {
 	fmt.Println("Monitoring...")
-	site := "https://www.alura.com.br"
-	resp, err := http.Get(site)
+	// site := "https://www.alura.com.br"
+	site := "https://random-status-code.herokuapp.com"
+	resp, _ := http.Get(site)
+
+	if resp.StatusCode == 200 {
+		fmt.Println("The website:", site, "was reloaded successfully")
+	} else {
+		fmt.Println("The website:", site, "is crashed. Status code:", resp.StatusCode)
+	}
 }
 
 func showLogs() {
