@@ -3,6 +3,7 @@ package main
 import (
 	"fmt" //format
 	"os"
+	"reflect"
 )
 
 func main() {
@@ -58,15 +59,12 @@ func startMonitoring() {
 	sites[3] = "https://idwall.co"
 	fmt.Println(sites)
 
-	// resp, _ := http.Get(sites)
-
-	// if resp.StatusCode == 200 {
-	// 	fmt.Println("The website:", site, "was reloaded successfully")
-	// } else {
-	// 	fmt.Println("The website:", site, "is crashed. Status code:", resp.StatusCode)
-	// }
 }
 
-func showLogs() {
-	fmt.Println("Showing logs...")
+func showNames() {
+	nomes := []string{"Leticia", "Ribeiro", "Bezerra"}
+	nomes = append(nomes, "Campos")
+	fmt.Println(nomes)
+	fmt.Println(reflect.TypeOf(nomes))
+	fmt.Println("The slice has", len(nomes)) //length
 }
