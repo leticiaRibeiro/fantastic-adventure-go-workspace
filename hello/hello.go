@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt" //format
-	"net/http"
 	"os"
 )
 
@@ -52,15 +51,20 @@ func showsMenu() {
 
 func startMonitoring() {
 	fmt.Println("Monitoring...")
-	// site := "https://www.alura.com.br"
-	site := "https://random-status-code.herokuapp.com"
-	resp, _ := http.Get(site)
+	var sites [4]string
+	sites[0] = "https://random-status-code.herokuapp.com"
+	sites[1] = "https://www.alura.com.br"
+	sites[2] = "https://www.caelum.com.br"
+	sites[3] = "https://idwall.co"
+	fmt.Println(sites)
 
-	if resp.StatusCode == 200 {
-		fmt.Println("The website:", site, "was reloaded successfully")
-	} else {
-		fmt.Println("The website:", site, "is crashed. Status code:", resp.StatusCode)
-	}
+	// resp, _ := http.Get(sites)
+
+	// if resp.StatusCode == 200 {
+	// 	fmt.Println("The website:", site, "was reloaded successfully")
+	// } else {
+	// 	fmt.Println("The website:", site, "is crashed. Status code:", resp.StatusCode)
+	// }
 }
 
 func showLogs() {
