@@ -4,9 +4,11 @@ import (
 	"bufio"
 	"fmt" //format
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"reflect"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -17,6 +19,7 @@ const delay = 5
 func main() {
 
 	showsIntroduction()
+
 	for { // while (true)
 		showsMenu()
 
@@ -26,7 +29,7 @@ func main() {
 		case 1:
 			startMonitoring()
 		case 2:
-			showNames()
+			printLogs()
 		case 0:
 			fmt.Println("Exit... bye :)")
 			os.Exit(0)
@@ -110,8 +113,10 @@ func testaSite(site string) {
 
 	if resp.StatusCode == 200 {
 		fmt.Println("Site:", site, "was reloaded successfully. Status code:", resp.StatusCode)
+		registraLog(site, true)
 	} else {
 		fmt.Println("Site:", site, "is crashed!!!! Status code:", resp.StatusCode)
+		registraLog(site, false)
 	}
 }
 
@@ -141,4 +146,28 @@ func leSitesDoArquivo() []string {
 	fmt.Println(sites)
 	arquivo.Close()
 	return sites
+}
+
+func registraLog(site string, status bool) {
+	arquivo, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+
+	if err != nil {
+		fmt.Println("Exception:", err)
+	}
+
+	fmt.Println(arquivo)
+
+	arquivo.WriteString(time.Now().Format(time.Kitchen) + "---" + site + "- online: " + strconv.FormatBool(status) + "\n")
+
+	arquivo.Close()
+}
+
+func printLogs() {
+	arquivo, err := ioutil.ReadFile("log.txt")
+
+	if err != nil {
+		fmt.Println("Exception:", err)
+	}
+
+	fmt.Println(string(arquivo))
 }
